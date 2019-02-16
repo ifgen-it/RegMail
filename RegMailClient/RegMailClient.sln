@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.28307.421
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RegMailClient", "RegMailClient\RegMailClient.csproj", "{0AAD6C83-EDD8-4FAB-BDA4-2C7426B0E08B}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{0AAD6C83-EDD8-4FAB-BDA4-2C7426B0E08B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0AAD6C83-EDD8-4FAB-BDA4-2C7426B0E08B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0AAD6C83-EDD8-4FAB-BDA4-2C7426B0E08B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0AAD6C83-EDD8-4FAB-BDA4-2C7426B0E08B}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {AFCDCE57-57DE-4577-8B70-C175C621F74A}
+	EndGlobalSection
+EndGlobal
