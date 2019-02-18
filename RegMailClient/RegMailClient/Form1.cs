@@ -6,11 +6,23 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
+using System.Net;
+using System.Net.Sockets;
+using System.Threading.Tasks;
+using System.IO;
 
 namespace RegMailClient
 {
     public partial class Form1 : Form
     {
+
+        static int serverPort = 8005;
+        static string serverAddress = "127.0.0.1";
+        Socket socket = null;
+        bool wasConnected = false;
+
+
+
         public Form1()
         {
             InitializeComponent();
@@ -22,6 +34,22 @@ namespace RegMailClient
             btnSubmit.Click += BtnSubmit_Click;
             btnClearMailList.Click += BtnClearMailList_Click;
             btnLoadMailList.Click += BtnLoadMailList_Click;
+            btnConnect.Click += BtnConnect_Click;
+        }
+
+        private void BtnConnect_Click(object sender, EventArgs e)
+        {
+            if (ConnectServer())
+            {
+                lbStatusConnection.Text = "Connected";
+                lbStatusConnection.ForeColor = Color.Green;
+                wasConnected = true;
+            }
+            else
+            {
+                lbStatusConnection.Text = "Cannot connect";
+                lbStatusConnection.ForeColor = Color.Red;
+            }
         }
 
         private void BtnLoadMailList_Click(object sender, EventArgs e)
@@ -34,7 +62,6 @@ namespace RegMailClient
             tbMailList.Text = "";
         }
 
-        // HANDLERS BODY
 
         private void BtnSubmit_Click(object sender, EventArgs e)
         {
@@ -124,5 +151,21 @@ namespace RegMailClient
 
         }
 
+        private bool ConnectServer()
+        {
+            try
+            {
+                IPEndPoint ipPoint = new IPEndPoint(IPAddress.Parse(serverAddress), serverPort);
+                socket = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
+                socket.Connect(ipPoint);
+                return true;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                SetInfo(ex.Message);
+                return false;
+            }
+        }
     }
 }

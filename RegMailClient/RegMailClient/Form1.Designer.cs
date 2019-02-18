@@ -30,6 +30,22 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.tabControl1 = new System.Windows.Forms.TabControl();
+            this.tabPage3 = new System.Windows.Forms.TabPage();
+            this.button1 = new System.Windows.Forms.Button();
+            this.btnConnect = new System.Windows.Forms.Button();
+            this.tbIP4 = new System.Windows.Forms.TextBox();
+            this.tbIP3 = new System.Windows.Forms.TextBox();
+            this.tbIP2 = new System.Windows.Forms.TextBox();
+            this.tbPort = new System.Windows.Forms.TextBox();
+            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.tbIP1 = new System.Windows.Forms.TextBox();
+            this.label10 = new System.Windows.Forms.Label();
+            this.label13 = new System.Windows.Forms.Label();
+            this.label9 = new System.Windows.Forms.Label();
+            this.lbStatusConnection = new System.Windows.Forms.Label();
+            this.label11 = new System.Windows.Forms.Label();
+            this.label12 = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.btnSubmit = new System.Windows.Forms.Button();
             this.pickDate = new System.Windows.Forms.DateTimePicker();
@@ -50,26 +66,10 @@
             this.btnLoadMailList = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.lbInfo = new System.Windows.Forms.Label();
-            this.tabPage3 = new System.Windows.Forms.TabPage();
-            this.label2 = new System.Windows.Forms.Label();
-            this.label9 = new System.Windows.Forms.Label();
-            this.label10 = new System.Windows.Forms.Label();
-            this.tbIP1 = new System.Windows.Forms.TextBox();
-            this.tbIP2 = new System.Windows.Forms.TextBox();
-            this.tbIP3 = new System.Windows.Forms.TextBox();
-            this.tbIP4 = new System.Windows.Forms.TextBox();
-            this.tbPort = new System.Windows.Forms.TextBox();
-            this.btnConnect = new System.Windows.Forms.Button();
-            this.label11 = new System.Windows.Forms.Label();
-            this.lbStatusConnection = new System.Windows.Forms.Label();
-            this.label12 = new System.Windows.Forms.Label();
-            this.label13 = new System.Windows.Forms.Label();
-            this.textBox1 = new System.Windows.Forms.TextBox();
-            this.button1 = new System.Windows.Forms.Button();
             this.tabControl1.SuspendLayout();
+            this.tabPage3.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.tabPage2.SuspendLayout();
-            this.tabPage3.SuspendLayout();
             this.SuspendLayout();
             // 
             // tabControl1
@@ -83,6 +83,164 @@
             this.tabControl1.SelectedIndex = 0;
             this.tabControl1.Size = new System.Drawing.Size(660, 365);
             this.tabControl1.TabIndex = 0;
+            // 
+            // tabPage3
+            // 
+            this.tabPage3.Controls.Add(this.button1);
+            this.tabPage3.Controls.Add(this.btnConnect);
+            this.tabPage3.Controls.Add(this.tbIP4);
+            this.tabPage3.Controls.Add(this.tbIP3);
+            this.tabPage3.Controls.Add(this.tbIP2);
+            this.tabPage3.Controls.Add(this.tbPort);
+            this.tabPage3.Controls.Add(this.textBox1);
+            this.tabPage3.Controls.Add(this.tbIP1);
+            this.tabPage3.Controls.Add(this.label10);
+            this.tabPage3.Controls.Add(this.label13);
+            this.tabPage3.Controls.Add(this.label9);
+            this.tabPage3.Controls.Add(this.lbStatusConnection);
+            this.tabPage3.Controls.Add(this.label11);
+            this.tabPage3.Controls.Add(this.label12);
+            this.tabPage3.Controls.Add(this.label2);
+            this.tabPage3.Location = new System.Drawing.Point(4, 28);
+            this.tabPage3.Name = "tabPage3";
+            this.tabPage3.Size = new System.Drawing.Size(652, 333);
+            this.tabPage3.TabIndex = 2;
+            this.tabPage3.Text = "Connection";
+            this.tabPage3.UseVisualStyleBackColor = true;
+            // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(110, 226);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(166, 30);
+            this.button1.TabIndex = 3;
+            this.button1.Text = "Disconnect";
+            this.button1.UseVisualStyleBackColor = true;
+            // 
+            // btnConnect
+            // 
+            this.btnConnect.Location = new System.Drawing.Point(110, 180);
+            this.btnConnect.Name = "btnConnect";
+            this.btnConnect.Size = new System.Drawing.Size(166, 30);
+            this.btnConnect.TabIndex = 3;
+            this.btnConnect.Text = "Connect";
+            this.btnConnect.UseVisualStyleBackColor = true;
+            // 
+            // tbIP4
+            // 
+            this.tbIP4.Location = new System.Drawing.Point(239, 74);
+            this.tbIP4.Name = "tbIP4";
+            this.tbIP4.Size = new System.Drawing.Size(37, 27);
+            this.tbIP4.TabIndex = 2;
+            this.tbIP4.Text = "1";
+            this.tbIP4.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
+            // tbIP3
+            // 
+            this.tbIP3.Location = new System.Drawing.Point(196, 74);
+            this.tbIP3.Name = "tbIP3";
+            this.tbIP3.Size = new System.Drawing.Size(37, 27);
+            this.tbIP3.TabIndex = 2;
+            this.tbIP3.Text = "0";
+            this.tbIP3.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
+            // tbIP2
+            // 
+            this.tbIP2.Location = new System.Drawing.Point(153, 74);
+            this.tbIP2.Name = "tbIP2";
+            this.tbIP2.Size = new System.Drawing.Size(37, 27);
+            this.tbIP2.TabIndex = 2;
+            this.tbIP2.Text = "0";
+            this.tbIP2.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
+            // tbPort
+            // 
+            this.tbPort.Location = new System.Drawing.Point(110, 115);
+            this.tbPort.Name = "tbPort";
+            this.tbPort.Size = new System.Drawing.Size(80, 27);
+            this.tbPort.TabIndex = 2;
+            this.tbPort.Text = "8005";
+            this.tbPort.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
+            // textBox1
+            // 
+            this.textBox1.Location = new System.Drawing.Point(430, 74);
+            this.textBox1.Name = "textBox1";
+            this.textBox1.Size = new System.Drawing.Size(151, 27);
+            this.textBox1.TabIndex = 2;
+            this.textBox1.Text = "Evgen S";
+            // 
+            // tbIP1
+            // 
+            this.tbIP1.Location = new System.Drawing.Point(110, 74);
+            this.tbIP1.Name = "tbIP1";
+            this.tbIP1.Size = new System.Drawing.Size(37, 27);
+            this.tbIP1.TabIndex = 2;
+            this.tbIP1.Text = "127";
+            this.tbIP1.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.Location = new System.Drawing.Point(49, 118);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(46, 19);
+            this.label10.TabIndex = 1;
+            this.label10.Text = "Port :";
+            // 
+            // label13
+            // 
+            this.label13.AutoSize = true;
+            this.label13.Location = new System.Drawing.Point(358, 77);
+            this.label13.Name = "label13";
+            this.label13.Size = new System.Drawing.Size(56, 19);
+            this.label13.TabIndex = 1;
+            this.label13.Text = "Name :";
+            // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Location = new System.Drawing.Point(18, 77);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(77, 19);
+            this.label9.TabIndex = 1;
+            this.label9.Text = "IP adress :";
+            // 
+            // lbStatusConnection
+            // 
+            this.lbStatusConnection.AutoSize = true;
+            this.lbStatusConnection.Location = new System.Drawing.Point(106, 290);
+            this.lbStatusConnection.Name = "lbStatusConnection";
+            this.lbStatusConnection.Size = new System.Drawing.Size(102, 19);
+            this.lbStatusConnection.TabIndex = 0;
+            this.lbStatusConnection.Text = "Disconnected";
+            // 
+            // label11
+            // 
+            this.label11.AutoSize = true;
+            this.label11.Location = new System.Drawing.Point(35, 290);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(60, 19);
+            this.label11.TabIndex = 0;
+            this.label11.Text = "Status :";
+            // 
+            // label12
+            // 
+            this.label12.AutoSize = true;
+            this.label12.Location = new System.Drawing.Point(358, 29);
+            this.label12.Name = "label12";
+            this.label12.Size = new System.Drawing.Size(108, 19);
+            this.label12.TabIndex = 0;
+            this.label12.Text = "Client settings";
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(24, 29);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(209, 19);
+            this.label2.TabIndex = 0;
+            this.label2.Text = "Server configuration settings";
             // 
             // tabPage1
             // 
@@ -286,164 +444,6 @@
             this.lbInfo.TabIndex = 1;
             this.lbInfo.Text = "Welcome to the Registration Mail System";
             // 
-            // tabPage3
-            // 
-            this.tabPage3.Controls.Add(this.button1);
-            this.tabPage3.Controls.Add(this.btnConnect);
-            this.tabPage3.Controls.Add(this.tbIP4);
-            this.tabPage3.Controls.Add(this.tbIP3);
-            this.tabPage3.Controls.Add(this.tbIP2);
-            this.tabPage3.Controls.Add(this.tbPort);
-            this.tabPage3.Controls.Add(this.textBox1);
-            this.tabPage3.Controls.Add(this.tbIP1);
-            this.tabPage3.Controls.Add(this.label10);
-            this.tabPage3.Controls.Add(this.label13);
-            this.tabPage3.Controls.Add(this.label9);
-            this.tabPage3.Controls.Add(this.lbStatusConnection);
-            this.tabPage3.Controls.Add(this.label11);
-            this.tabPage3.Controls.Add(this.label12);
-            this.tabPage3.Controls.Add(this.label2);
-            this.tabPage3.Location = new System.Drawing.Point(4, 28);
-            this.tabPage3.Name = "tabPage3";
-            this.tabPage3.Size = new System.Drawing.Size(652, 333);
-            this.tabPage3.TabIndex = 2;
-            this.tabPage3.Text = "Connection";
-            this.tabPage3.UseVisualStyleBackColor = true;
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(24, 29);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(209, 19);
-            this.label2.TabIndex = 0;
-            this.label2.Text = "Server configuration settings";
-            // 
-            // label9
-            // 
-            this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(18, 77);
-            this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(77, 19);
-            this.label9.TabIndex = 1;
-            this.label9.Text = "IP adress :";
-            // 
-            // label10
-            // 
-            this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(49, 118);
-            this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(46, 19);
-            this.label10.TabIndex = 1;
-            this.label10.Text = "Port :";
-            // 
-            // tbIP1
-            // 
-            this.tbIP1.Location = new System.Drawing.Point(110, 74);
-            this.tbIP1.Name = "tbIP1";
-            this.tbIP1.Size = new System.Drawing.Size(37, 27);
-            this.tbIP1.TabIndex = 2;
-            this.tbIP1.Text = "127";
-            this.tbIP1.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            // 
-            // tbIP2
-            // 
-            this.tbIP2.Location = new System.Drawing.Point(153, 74);
-            this.tbIP2.Name = "tbIP2";
-            this.tbIP2.Size = new System.Drawing.Size(37, 27);
-            this.tbIP2.TabIndex = 2;
-            this.tbIP2.Text = "0";
-            this.tbIP2.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            // 
-            // tbIP3
-            // 
-            this.tbIP3.Location = new System.Drawing.Point(196, 74);
-            this.tbIP3.Name = "tbIP3";
-            this.tbIP3.Size = new System.Drawing.Size(37, 27);
-            this.tbIP3.TabIndex = 2;
-            this.tbIP3.Text = "0";
-            this.tbIP3.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            // 
-            // tbIP4
-            // 
-            this.tbIP4.Location = new System.Drawing.Point(239, 74);
-            this.tbIP4.Name = "tbIP4";
-            this.tbIP4.Size = new System.Drawing.Size(37, 27);
-            this.tbIP4.TabIndex = 2;
-            this.tbIP4.Text = "1";
-            this.tbIP4.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            // 
-            // tbPort
-            // 
-            this.tbPort.Location = new System.Drawing.Point(110, 115);
-            this.tbPort.Name = "tbPort";
-            this.tbPort.Size = new System.Drawing.Size(80, 27);
-            this.tbPort.TabIndex = 2;
-            this.tbPort.Text = "8005";
-            this.tbPort.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            // 
-            // btnConnect
-            // 
-            this.btnConnect.Location = new System.Drawing.Point(110, 180);
-            this.btnConnect.Name = "btnConnect";
-            this.btnConnect.Size = new System.Drawing.Size(166, 30);
-            this.btnConnect.TabIndex = 3;
-            this.btnConnect.Text = "Connect";
-            this.btnConnect.UseVisualStyleBackColor = true;
-            // 
-            // label11
-            // 
-            this.label11.AutoSize = true;
-            this.label11.Location = new System.Drawing.Point(35, 290);
-            this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(60, 19);
-            this.label11.TabIndex = 0;
-            this.label11.Text = "Status :";
-            // 
-            // lbStatusConnection
-            // 
-            this.lbStatusConnection.AutoSize = true;
-            this.lbStatusConnection.Location = new System.Drawing.Point(106, 290);
-            this.lbStatusConnection.Name = "lbStatusConnection";
-            this.lbStatusConnection.Size = new System.Drawing.Size(110, 19);
-            this.lbStatusConnection.TabIndex = 0;
-            this.lbStatusConnection.Text = "Not connected";
-            // 
-            // label12
-            // 
-            this.label12.AutoSize = true;
-            this.label12.Location = new System.Drawing.Point(358, 29);
-            this.label12.Name = "label12";
-            this.label12.Size = new System.Drawing.Size(108, 19);
-            this.label12.TabIndex = 0;
-            this.label12.Text = "Client settings";
-            // 
-            // label13
-            // 
-            this.label13.AutoSize = true;
-            this.label13.Location = new System.Drawing.Point(358, 77);
-            this.label13.Name = "label13";
-            this.label13.Size = new System.Drawing.Size(56, 19);
-            this.label13.TabIndex = 1;
-            this.label13.Text = "Name :";
-            // 
-            // textBox1
-            // 
-            this.textBox1.Location = new System.Drawing.Point(430, 74);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(151, 27);
-            this.textBox1.TabIndex = 2;
-            this.textBox1.Text = "Evgen S";
-            // 
-            // button1
-            // 
-            this.button1.Location = new System.Drawing.Point(110, 226);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(166, 30);
-            this.button1.TabIndex = 3;
-            this.button1.Text = "Disconnect";
-            this.button1.UseVisualStyleBackColor = true;
-            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -460,12 +460,12 @@
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "RegMail";
             this.tabControl1.ResumeLayout(false);
+            this.tabPage3.ResumeLayout(false);
+            this.tabPage3.PerformLayout();
             this.tabPage1.ResumeLayout(false);
             this.tabPage1.PerformLayout();
             this.tabPage2.ResumeLayout(false);
             this.tabPage2.PerformLayout();
-            this.tabPage3.ResumeLayout(false);
-            this.tabPage3.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
