@@ -5,9 +5,8 @@ using System.Text;
 using System.Xml.Serialization;
 using System.IO;
 
-namespace RegMailClient
+namespace RegMailServer
 {
-    //[Serializable]
     public class Mail
     {
         public int id;
@@ -55,7 +54,7 @@ namespace RegMailClient
                     }
                 }
             }
-            
+
             StringBuilder res = new StringBuilder();
             res.Append(br);
             res.AppendLine();

@@ -202,6 +202,7 @@
             // 
             // tbLog
             // 
+            this.tbLog.AcceptsReturn = true;
             this.tbLog.BackColor = System.Drawing.Color.White;
             this.tbLog.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.tbLog.Font = new System.Drawing.Font("Trebuchet MS", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));

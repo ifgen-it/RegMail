@@ -10,6 +10,7 @@ using System.Net;
 using System.Net.Sockets;
 using System.Threading.Tasks;
 using System.IO;
+using System.Xml.Serialization;
 
 namespace RegMailClient
 {
@@ -80,10 +81,33 @@ namespace RegMailClient
             }
             Mail newMail = CreateMail();
             Console.WriteLine(newMail);
-            tbMailList.AppendText(newMail.ToString());
-            SetInfo("Mail submited");
+
+            //tbMailList.AppendText(newMail.ToString());
+            SendMail(newMail);
+            //SetInfo("Mail submited");
             ClearInputs();
             
+            
+        }
+
+        private void SendMail(Mail mail)
+        {
+            byte[] package = mail.ToXMLByteArray();
+            socket.Send(package);
+
+            // WAIT ANSWER
+            byte[] data = new byte[256];
+            StringBuilder builder = new StringBuilder();
+            int bytes = 0;
+            do
+            {
+                bytes = socket.Receive(data, data.Length, 0);
+                builder.Append(Encoding.Unicode.GetString(data, 0, bytes));
+            } while (socket.Available > 0);
+
+            Console.WriteLine("Server says: " + builder.ToString());
+            SetInfo(builder.ToString());
+
         }
 
         private bool CheckInputs()
@@ -167,5 +191,7 @@ namespace RegMailClient
                 return false;
             }
         }
+
+       
     }
 }
