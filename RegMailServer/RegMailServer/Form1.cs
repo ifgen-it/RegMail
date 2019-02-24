@@ -76,33 +76,7 @@ namespace RegMailServer
 
         private void BtnKickOne_Click(object sender, EventArgs e)
         {
-            string delClientName = tbKickClient.Text.Trim();
-
-            for (int i = 0; i < clients.Count; i++)
-            {
-                if (clients[i].Name.Equals(delClientName))
-                {
-                    AddLog(clients[i].Name + " was kicked");
-
-                    // SEND THE ANSWER
-                    Package responsePackage = new Package();
-                    responsePackage.command = "DISCONNECTED";
-                    responsePackage.info = "You was kicked";
-
-                    byte[] byteResponsePackage = responsePackage.ToXMLByteArray();
-                    clients[i].Socket.Send(byteResponsePackage);
-
-
-                    clients[i].Socket.Shutdown(SocketShutdown.Both);
-                    clients[i].Socket.Close();
-                    clients.RemoveAt(i);
-                    ShowClientsNames();
-                }
-            }
-            if (clients.Count == 0)
-            {
-                SetKickButtons(false);
-            }
+            KickOneClient();
         }
 
         private void BtnKickAll_Click(object sender, EventArgs e)
@@ -131,13 +105,16 @@ namespace RegMailServer
 
                 btnStartServer.Enabled = false;
                 btnStopServer.Enabled = true;
+
+                SetInfo(res);
+                AddLog(res);
             }
             else
             {
                 res = "Server cannot start";
+                AddLog(res);
             }
-            SetInfo(res);
-            AddLog(res);
+            
         }
 
 
@@ -145,11 +122,13 @@ namespace RegMailServer
 
         private bool StartServer()
         {
-
-            IPEndPoint ipPoint = new IPEndPoint(IPAddress.Any, serverPort);
-            listenSocket = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
             try
             {
+                serverPort = int.Parse(tbPort.Text.Trim());
+
+                IPEndPoint ipPoint = new IPEndPoint(IPAddress.Any, serverPort);
+                listenSocket = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
+            
                 listenSocket.Bind(ipPoint);
                 listenSocket.Listen(10);
 
@@ -424,6 +403,39 @@ namespace RegMailServer
                 ShowClientsNames();
             }
             SetKickButtons(false);
+            SetInfo("All clients was kicked");
+        }
+
+        private void KickOneClient()
+        {
+            string delClientName = tbKickClient.Text.Trim();
+
+            for (int i = 0; i < clients.Count; i++)
+            {
+                if (clients[i].Name.Equals(delClientName))
+                {
+                    AddLog(clients[i].Name + " was kicked");
+                    SetInfo(clients[i].Name + " was kicked");
+
+                    // SEND THE ANSWER
+                    Package responsePackage = new Package();
+                    responsePackage.command = "DISCONNECTED";
+                    responsePackage.info = "You was kicked";
+
+                    byte[] byteResponsePackage = responsePackage.ToXMLByteArray();
+                    clients[i].Socket.Send(byteResponsePackage);
+
+
+                    clients[i].Socket.Shutdown(SocketShutdown.Both);
+                    clients[i].Socket.Close();
+                    clients.RemoveAt(i);
+                    ShowClientsNames();
+                }
+            }
+            if (clients.Count == 0)
+            {
+                SetKickButtons(false);
+            }
         }
     }
 }

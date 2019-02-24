@@ -113,7 +113,7 @@
             this.btnDisconnect.Location = new System.Drawing.Point(110, 226);
             this.btnDisconnect.Name = "btnDisconnect";
             this.btnDisconnect.Size = new System.Drawing.Size(166, 30);
-            this.btnDisconnect.TabIndex = 3;
+            this.btnDisconnect.TabIndex = 8;
             this.btnDisconnect.Text = "Disconnect";
             this.btnDisconnect.UseVisualStyleBackColor = true;
             // 
@@ -122,7 +122,7 @@
             this.btnConnect.Location = new System.Drawing.Point(110, 180);
             this.btnConnect.Name = "btnConnect";
             this.btnConnect.Size = new System.Drawing.Size(166, 30);
-            this.btnConnect.TabIndex = 3;
+            this.btnConnect.TabIndex = 7;
             this.btnConnect.Text = "Connect";
             this.btnConnect.UseVisualStyleBackColor = true;
             // 
@@ -131,7 +131,7 @@
             this.tbIP4.Location = new System.Drawing.Point(239, 74);
             this.tbIP4.Name = "tbIP4";
             this.tbIP4.Size = new System.Drawing.Size(37, 27);
-            this.tbIP4.TabIndex = 2;
+            this.tbIP4.TabIndex = 4;
             this.tbIP4.Text = "1";
             this.tbIP4.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
@@ -140,7 +140,7 @@
             this.tbIP3.Location = new System.Drawing.Point(196, 74);
             this.tbIP3.Name = "tbIP3";
             this.tbIP3.Size = new System.Drawing.Size(37, 27);
-            this.tbIP3.TabIndex = 2;
+            this.tbIP3.TabIndex = 3;
             this.tbIP3.Text = "0";
             this.tbIP3.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
@@ -158,7 +158,7 @@
             this.tbPort.Location = new System.Drawing.Point(110, 115);
             this.tbPort.Name = "tbPort";
             this.tbPort.Size = new System.Drawing.Size(80, 27);
-            this.tbPort.TabIndex = 2;
+            this.tbPort.TabIndex = 5;
             this.tbPort.Text = "8005";
             this.tbPort.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
@@ -167,7 +167,7 @@
             this.tbClientName.Location = new System.Drawing.Point(430, 74);
             this.tbClientName.Name = "tbClientName";
             this.tbClientName.Size = new System.Drawing.Size(151, 27);
-            this.tbClientName.TabIndex = 2;
+            this.tbClientName.TabIndex = 6;
             this.tbClientName.Text = "Evgen S";
             // 
             // tbIP1
@@ -175,7 +175,7 @@
             this.tbIP1.Location = new System.Drawing.Point(110, 74);
             this.tbIP1.Name = "tbIP1";
             this.tbIP1.Size = new System.Drawing.Size(37, 27);
-            this.tbIP1.TabIndex = 2;
+            this.tbIP1.TabIndex = 1;
             this.tbIP1.Text = "127";
             this.tbIP1.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
@@ -270,7 +270,7 @@
             this.btnSubmit.Location = new System.Drawing.Point(12, 288);
             this.btnSubmit.Name = "btnSubmit";
             this.btnSubmit.Size = new System.Drawing.Size(83, 28);
-            this.btnSubmit.TabIndex = 3;
+            this.btnSubmit.TabIndex = 7;
             this.btnSubmit.Text = "Submit";
             this.btnSubmit.UseVisualStyleBackColor = true;
             // 
@@ -288,7 +288,7 @@
             this.tbMessage.Name = "tbMessage";
             this.tbMessage.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
             this.tbMessage.Size = new System.Drawing.Size(524, 133);
-            this.tbMessage.TabIndex = 1;
+            this.tbMessage.TabIndex = 6;
             this.tbMessage.Text = "How are you, Kate?";
             // 
             // label8
@@ -305,7 +305,7 @@
             this.tbTags.Location = new System.Drawing.Point(112, 150);
             this.tbTags.Name = "tbTags";
             this.tbTags.Size = new System.Drawing.Size(524, 27);
-            this.tbTags.TabIndex = 1;
+            this.tbTags.TabIndex = 5;
             this.tbTags.Text = "new good mail";
             // 
             // label7
@@ -322,7 +322,7 @@
             this.tbFrom.Location = new System.Drawing.Point(112, 117);
             this.tbFrom.Name = "tbFrom";
             this.tbFrom.Size = new System.Drawing.Size(524, 27);
-            this.tbFrom.TabIndex = 1;
+            this.tbFrom.TabIndex = 4;
             this.tbFrom.Text = "Evgen";
             // 
             // label6
@@ -339,7 +339,7 @@
             this.tbTo.Location = new System.Drawing.Point(112, 84);
             this.tbTo.Name = "tbTo";
             this.tbTo.Size = new System.Drawing.Size(524, 27);
-            this.tbTo.TabIndex = 1;
+            this.tbTo.TabIndex = 3;
             this.tbTo.Text = "Kate";
             // 
             // label5
@@ -401,7 +401,7 @@
             this.tbMailList.ReadOnly = true;
             this.tbMailList.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
             this.tbMailList.Size = new System.Drawing.Size(652, 268);
-            this.tbMailList.TabIndex = 1;
+            this.tbMailList.TabIndex = 3;
             this.tbMailList.Text = "Here will be loaded mail";
             // 
             // btnClearMail
@@ -409,7 +409,7 @@
             this.btnClearMail.Location = new System.Drawing.Point(168, 23);
             this.btnClearMail.Name = "btnClearMail";
             this.btnClearMail.Size = new System.Drawing.Size(126, 28);
-            this.btnClearMail.TabIndex = 0;
+            this.btnClearMail.TabIndex = 2;
             this.btnClearMail.Text = "Clear";
             this.btnClearMail.UseVisualStyleBackColor = true;
             // 
@@ -418,7 +418,7 @@
             this.btnLoadMail.Location = new System.Drawing.Point(17, 23);
             this.btnLoadMail.Name = "btnLoadMail";
             this.btnLoadMail.Size = new System.Drawing.Size(126, 28);
-            this.btnLoadMail.TabIndex = 0;
+            this.btnLoadMail.TabIndex = 1;
             this.btnLoadMail.Text = "Load";
             this.btnLoadMail.UseVisualStyleBackColor = true;
             // 

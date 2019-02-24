@@ -37,7 +37,7 @@
             this.btnKickAll = new System.Windows.Forms.Button();
             this.btnKickOne = new System.Windows.Forms.Button();
             this.btnStartServer = new System.Windows.Forms.Button();
-            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.tbPort = new System.Windows.Forms.TextBox();
             this.label4 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.tabPage2 = new System.Windows.Forms.TabPage();
@@ -72,7 +72,7 @@
             this.tabPage1.Controls.Add(this.btnKickAll);
             this.tabPage1.Controls.Add(this.btnKickOne);
             this.tabPage1.Controls.Add(this.btnStartServer);
-            this.tabPage1.Controls.Add(this.textBox1);
+            this.tabPage1.Controls.Add(this.tbPort);
             this.tabPage1.Controls.Add(this.label4);
             this.tabPage1.Controls.Add(this.label2);
             this.tabPage1.Font = new System.Drawing.Font("Candara", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
@@ -89,7 +89,7 @@
             this.tbKickClient.Location = new System.Drawing.Point(393, 271);
             this.tbKickClient.Name = "tbKickClient";
             this.tbKickClient.Size = new System.Drawing.Size(201, 27);
-            this.tbKickClient.TabIndex = 4;
+            this.tbKickClient.TabIndex = 6;
             this.tbKickClient.Text = "Kicked Client";
             // 
             // tbClients
@@ -102,6 +102,7 @@
             this.tbClients.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
             this.tbClients.Size = new System.Drawing.Size(201, 148);
             this.tbClients.TabIndex = 3;
+            this.tbClients.TabStop = false;
             this.tbClients.Text = "Client1\r\nClient2\r\n";
             // 
             // btnStopServer
@@ -110,7 +111,7 @@
             this.btnStopServer.Location = new System.Drawing.Point(36, 135);
             this.btnStopServer.Name = "btnStopServer";
             this.btnStopServer.Size = new System.Drawing.Size(293, 32);
-            this.btnStopServer.TabIndex = 2;
+            this.btnStopServer.TabIndex = 3;
             this.btnStopServer.Text = "Stop";
             this.btnStopServer.UseVisualStyleBackColor = true;
             // 
@@ -120,7 +121,7 @@
             this.btnKickAll.Location = new System.Drawing.Point(36, 267);
             this.btnKickAll.Name = "btnKickAll";
             this.btnKickAll.Size = new System.Drawing.Size(139, 32);
-            this.btnKickAll.TabIndex = 2;
+            this.btnKickAll.TabIndex = 4;
             this.btnKickAll.Text = "Kick all clients";
             this.btnKickAll.UseVisualStyleBackColor = true;
             // 
@@ -130,7 +131,7 @@
             this.btnKickOne.Location = new System.Drawing.Point(190, 267);
             this.btnKickOne.Name = "btnKickOne";
             this.btnKickOne.Size = new System.Drawing.Size(139, 32);
-            this.btnKickOne.TabIndex = 2;
+            this.btnKickOne.TabIndex = 5;
             this.btnKickOne.Text = "Kick one client";
             this.btnKickOne.UseVisualStyleBackColor = true;
             // 
@@ -144,16 +145,16 @@
             this.btnStartServer.Text = "Start";
             this.btnStartServer.UseVisualStyleBackColor = true;
             // 
-            // textBox1
+            // tbPort
             // 
-            this.textBox1.Font = new System.Drawing.Font("Candara", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.textBox1.ForeColor = System.Drawing.Color.Blue;
-            this.textBox1.Location = new System.Drawing.Point(89, 42);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(73, 27);
-            this.textBox1.TabIndex = 1;
-            this.textBox1.Text = "8005";
-            this.textBox1.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.tbPort.Font = new System.Drawing.Font("Candara", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.tbPort.ForeColor = System.Drawing.Color.Blue;
+            this.tbPort.Location = new System.Drawing.Point(89, 42);
+            this.tbPort.Name = "tbPort";
+            this.tbPort.Size = new System.Drawing.Size(73, 27);
+            this.tbPort.TabIndex = 1;
+            this.tbPort.Text = "8005";
+            this.tbPort.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // label4
             // 
@@ -196,7 +197,7 @@
             this.btnClearLog.Location = new System.Drawing.Point(14, 20);
             this.btnClearLog.Name = "btnClearLog";
             this.btnClearLog.Size = new System.Drawing.Size(135, 29);
-            this.btnClearLog.TabIndex = 3;
+            this.btnClearLog.TabIndex = 1;
             this.btnClearLog.Text = "Clear";
             this.btnClearLog.UseVisualStyleBackColor = true;
             // 
@@ -213,7 +214,7 @@
             this.tbLog.ReadOnly = true;
             this.tbLog.ScrollBars = System.Windows.Forms.ScrollBars.Both;
             this.tbLog.Size = new System.Drawing.Size(646, 253);
-            this.tbLog.TabIndex = 1;
+            this.tbLog.TabIndex = 2;
             this.tbLog.Text = "Here will be server log\r\nИ сообщения юзеров\r\n";
             this.tbLog.WordWrap = false;
             // 
@@ -279,7 +280,7 @@
 
         private System.Windows.Forms.TabControl tabControl1;
         private System.Windows.Forms.TabPage tabPage1;
-        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.TextBox tbPort;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.TabPage tabPage2;
         private System.Windows.Forms.TextBox tbLog;
