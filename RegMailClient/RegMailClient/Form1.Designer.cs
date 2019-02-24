@@ -31,13 +31,13 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage3 = new System.Windows.Forms.TabPage();
-            this.button1 = new System.Windows.Forms.Button();
+            this.btnDisconnect = new System.Windows.Forms.Button();
             this.btnConnect = new System.Windows.Forms.Button();
             this.tbIP4 = new System.Windows.Forms.TextBox();
             this.tbIP3 = new System.Windows.Forms.TextBox();
             this.tbIP2 = new System.Windows.Forms.TextBox();
             this.tbPort = new System.Windows.Forms.TextBox();
-            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.tbClientName = new System.Windows.Forms.TextBox();
             this.tbIP1 = new System.Windows.Forms.TextBox();
             this.label10 = new System.Windows.Forms.Label();
             this.label13 = new System.Windows.Forms.Label();
@@ -62,8 +62,8 @@
             this.label3 = new System.Windows.Forms.Label();
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.tbMailList = new System.Windows.Forms.TextBox();
-            this.btnClearMailList = new System.Windows.Forms.Button();
-            this.btnLoadMailList = new System.Windows.Forms.Button();
+            this.btnClearMail = new System.Windows.Forms.Button();
+            this.btnLoadMail = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.lbInfo = new System.Windows.Forms.Label();
             this.tabControl1.SuspendLayout();
@@ -86,13 +86,13 @@
             // 
             // tabPage3
             // 
-            this.tabPage3.Controls.Add(this.button1);
+            this.tabPage3.Controls.Add(this.btnDisconnect);
             this.tabPage3.Controls.Add(this.btnConnect);
             this.tabPage3.Controls.Add(this.tbIP4);
             this.tabPage3.Controls.Add(this.tbIP3);
             this.tabPage3.Controls.Add(this.tbIP2);
             this.tabPage3.Controls.Add(this.tbPort);
-            this.tabPage3.Controls.Add(this.textBox1);
+            this.tabPage3.Controls.Add(this.tbClientName);
             this.tabPage3.Controls.Add(this.tbIP1);
             this.tabPage3.Controls.Add(this.label10);
             this.tabPage3.Controls.Add(this.label13);
@@ -108,14 +108,14 @@
             this.tabPage3.Text = "Connection";
             this.tabPage3.UseVisualStyleBackColor = true;
             // 
-            // button1
+            // btnDisconnect
             // 
-            this.button1.Location = new System.Drawing.Point(110, 226);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(166, 30);
-            this.button1.TabIndex = 3;
-            this.button1.Text = "Disconnect";
-            this.button1.UseVisualStyleBackColor = true;
+            this.btnDisconnect.Location = new System.Drawing.Point(110, 226);
+            this.btnDisconnect.Name = "btnDisconnect";
+            this.btnDisconnect.Size = new System.Drawing.Size(166, 30);
+            this.btnDisconnect.TabIndex = 3;
+            this.btnDisconnect.Text = "Disconnect";
+            this.btnDisconnect.UseVisualStyleBackColor = true;
             // 
             // btnConnect
             // 
@@ -162,13 +162,13 @@
             this.tbPort.Text = "8005";
             this.tbPort.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
-            // textBox1
+            // tbClientName
             // 
-            this.textBox1.Location = new System.Drawing.Point(430, 74);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(151, 27);
-            this.textBox1.TabIndex = 2;
-            this.textBox1.Text = "Evgen S";
+            this.tbClientName.Location = new System.Drawing.Point(430, 74);
+            this.tbClientName.Name = "tbClientName";
+            this.tbClientName.Size = new System.Drawing.Size(151, 27);
+            this.tbClientName.TabIndex = 2;
+            this.tbClientName.Text = "Evgen S";
             // 
             // tbIP1
             // 
@@ -380,8 +380,8 @@
             // tabPage2
             // 
             this.tabPage2.Controls.Add(this.tbMailList);
-            this.tabPage2.Controls.Add(this.btnClearMailList);
-            this.tabPage2.Controls.Add(this.btnLoadMailList);
+            this.tabPage2.Controls.Add(this.btnClearMail);
+            this.tabPage2.Controls.Add(this.btnLoadMail);
             this.tabPage2.Location = new System.Drawing.Point(4, 28);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
@@ -404,23 +404,23 @@
             this.tbMailList.TabIndex = 1;
             this.tbMailList.Text = "Here will be loaded mail";
             // 
-            // btnClearMailList
+            // btnClearMail
             // 
-            this.btnClearMailList.Location = new System.Drawing.Point(168, 23);
-            this.btnClearMailList.Name = "btnClearMailList";
-            this.btnClearMailList.Size = new System.Drawing.Size(126, 28);
-            this.btnClearMailList.TabIndex = 0;
-            this.btnClearMailList.Text = "Clear";
-            this.btnClearMailList.UseVisualStyleBackColor = true;
+            this.btnClearMail.Location = new System.Drawing.Point(168, 23);
+            this.btnClearMail.Name = "btnClearMail";
+            this.btnClearMail.Size = new System.Drawing.Size(126, 28);
+            this.btnClearMail.TabIndex = 0;
+            this.btnClearMail.Text = "Clear";
+            this.btnClearMail.UseVisualStyleBackColor = true;
             // 
-            // btnLoadMailList
+            // btnLoadMail
             // 
-            this.btnLoadMailList.Location = new System.Drawing.Point(17, 23);
-            this.btnLoadMailList.Name = "btnLoadMailList";
-            this.btnLoadMailList.Size = new System.Drawing.Size(126, 28);
-            this.btnLoadMailList.TabIndex = 0;
-            this.btnLoadMailList.Text = "Load";
-            this.btnLoadMailList.UseVisualStyleBackColor = true;
+            this.btnLoadMail.Location = new System.Drawing.Point(17, 23);
+            this.btnLoadMail.Name = "btnLoadMail";
+            this.btnLoadMail.Size = new System.Drawing.Size(126, 28);
+            this.btnLoadMail.TabIndex = 0;
+            this.btnLoadMail.Text = "Load";
+            this.btnLoadMail.UseVisualStyleBackColor = true;
             // 
             // label1
             // 
@@ -491,17 +491,17 @@
         private System.Windows.Forms.TextBox tbTitle;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.Button btnLoadMailList;
+        private System.Windows.Forms.Button btnLoadMail;
         private System.Windows.Forms.TextBox tbMailList;
-        private System.Windows.Forms.Button btnClearMailList;
+        private System.Windows.Forms.Button btnClearMail;
         private System.Windows.Forms.TabPage tabPage3;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button btnDisconnect;
         private System.Windows.Forms.Button btnConnect;
         private System.Windows.Forms.TextBox tbIP4;
         private System.Windows.Forms.TextBox tbIP3;
         private System.Windows.Forms.TextBox tbIP2;
         private System.Windows.Forms.TextBox tbPort;
-        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.TextBox tbClientName;
         private System.Windows.Forms.TextBox tbIP1;
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.Label label13;

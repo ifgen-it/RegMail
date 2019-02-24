@@ -75,26 +75,6 @@ namespace RegMailClient
             return res.ToString();
         }
 
-        public byte[] ToXMLByteArray()
-        {
-            XmlSerializer xmlSer = new XmlSerializer(typeof(Mail));
-            using (var ms = new MemoryStream())
-            {
-                xmlSer.Serialize(ms, this);
-                return ms.ToArray();
-            }
-        }
-
-        public static Mail XMLByteAttayToMail(byte[] bytes)
-        {
-            using (var ms = new MemoryStream())
-            {
-                XmlSerializer xmlSer = new XmlSerializer(typeof(Mail));
-                ms.Write(bytes, 0, bytes.Length);
-                ms.Seek(0, SeekOrigin.Begin);
-                Mail mail = (Mail)xmlSer.Deserialize(ms);
-                return mail;
-            }
-        }
+       
     }
 }
