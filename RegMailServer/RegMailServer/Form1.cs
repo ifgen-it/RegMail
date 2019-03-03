@@ -513,8 +513,14 @@ namespace RegMailServer
                     responsePackage.info = "You was kicked";
 
                     byte[] byteResponsePackage = responsePackage.ToXMLByteArray();
-                    clients[i].Socket.Send(byteResponsePackage);
-
+                    try
+                    {
+                        clients[i].Socket.Send(byteResponsePackage);
+                    }
+                    catch(Exception ex)
+                    {
+                        Console.WriteLine(ex.Message);
+                    }
 
                     clients[i].Socket.Shutdown(SocketShutdown.Both);
                     clients[i].Socket.Close();
