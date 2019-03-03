@@ -10,6 +10,9 @@ using System.Net;
 using System.Net.Sockets;
 using System.Threading;
 using System.IO;
+using System.Configuration;
+using System.Data.SqlClient;
+
 
 namespace RegMailServer
 {
@@ -28,6 +31,9 @@ namespace RegMailServer
         bool serverWasStopped = false;
         Thread threadListener = null;
 
+        bool dbConnected = false;
+        SqlConnection connection = null;
+
 
         delegate void StringArgReturningVoidDelegate(string text);
         delegate void VoidArgReturningVoidDelegate();
@@ -40,8 +46,11 @@ namespace RegMailServer
 
             tbLog.Text = "";
             tbClients.Text = "";
+            tbKickClient.Text = "";
             btnStopServer.Enabled = false;
             SetKickButtons(false);
+
+            btnDisconnectDb.Enabled = false;
 
             mailDb = new List<Mail>();
 
@@ -52,26 +61,60 @@ namespace RegMailServer
             btnKickAll.Click += BtnKickAll_Click;
             btnKickOne.Click += BtnKickOne_Click;
             btnStopServer.Click += BtnStopServer_Click;
+            btnConnectDb.Click += BtnConnectDb_Click;
+            btnDisconnectDb.Click += BtnDisconnectDb_Click;
+        }
+
+        private void BtnDisconnectDb_Click(object sender, EventArgs e)
+        {
+            DbDisconnect();
+        }
+
+        private void BtnConnectDb_Click(object sender, EventArgs e)
+        {
+            // получаем строку подключения
+            string connectionString = ConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString;
+            Console.WriteLine(connectionString);
+
+            // Создание подключения
+            connection = new SqlConnection(connectionString);
+            try
+            {
+                // Открываем подключение
+                connection.Open();
+                Console.WriteLine("Подключение открыто");
+
+                SetInfo("Database connection opened");
+                AddLog("Database connection opened");
+                lbStatus.Text = "Status : Connected";
+                lbStatus.ForeColor = Color.Green;
+                dbConnected = true;
+                btnDisconnectDb.Enabled = true;
+                btnConnectDb.Enabled = false;
+
+                // Вывод информации о подключении
+                Console.WriteLine("Свойства подключения:");
+                Console.WriteLine("\tСтрока подключения: {0}", connection.ConnectionString);
+                Console.WriteLine("\tБаза данных: {0}", connection.Database);
+                Console.WriteLine("\tСервер: {0}", connection.DataSource);
+                Console.WriteLine("\tВерсия сервера: {0}", connection.ServerVersion);
+                Console.WriteLine("\tСостояние: {0}", connection.State);
+                Console.WriteLine("\tWorkstationld: {0}", connection.WorkstationId);
+
+
+
+            }
+            catch (SqlException ex)
+            {
+                Console.WriteLine(ex.Message);
+                SetInfo(ex.Message);
+            }
+            
         }
 
         private void BtnStopServer_Click(object sender, EventArgs e)
         {
-            KickAllClients();
-            serverWasStopped = true;
-            //threadListener.Interrupt();
-
-            listenSocket.Dispose();
-            
-            //listenSocket.Shutdown(SocketShutdown.Both);
-            //listenSocket.Close();
-
-            lbServerStatus.Text = "SERVER IS SLEEPING";
-            lbServerStatus.ForeColor = Color.Green;
-            SetInfo("Server stopped");
-            AddLog("Server stopped");
-
-            btnStartServer.Enabled = true;
-            btnStopServer.Enabled = false;
+            StopServer();
         }
 
         private void BtnKickOne_Click(object sender, EventArgs e)
@@ -99,6 +142,9 @@ namespace RegMailServer
                 lbServerStatus.ForeColor = Color.Red;
                 tbClients.Text = "";
                 tbKickClient.Text = "";
+
+                btnConnectDb.Enabled = false;
+                btnDisconnectDb.Enabled = false;
 
                 Thread threadRunServer = new Thread(RunServer);
                 threadRunServer.Start();
@@ -153,7 +199,7 @@ namespace RegMailServer
 
         private void AddLog(string text)
         {
-            string log = DateTime.Now + " " + text + "\n";
+            string log = DateTime.Now + " " + text + new StringBuilder().AppendLine().ToString();
 
             if (tbLog.InvokeRequired)
             {
@@ -254,10 +300,20 @@ namespace RegMailServer
                         if (package.command.Equals("INSERT"))
                         {
                             Mail mail = package.body[0];
-                            mailDb.Add(mail);
+
+                            if (dbConnected)
+                            {
+                                bool res = DbInsert(mail);
+                                Console.WriteLine(res);
+                            }
+                            else
+                            {
+                                mailDb.Add(mail);
+                            }
+
                             Console.WriteLine("Package:\n" + mail.ToString());
                             
-                            AddLog(clients[i].Name + " : " + package.command + new StringBuilder().AppendLine().ToString() + mail.ToString());
+                            AddLog(clients[i].Name + " : " + package.command + " : " + new StringBuilder().AppendLine().ToString() + mail.ToString());
 
                             // SEND THE ANSWER
                             Package responsePackage = new Package();
@@ -273,21 +329,38 @@ namespace RegMailServer
                         else if (package.command.Equals("GETALLMAIL"))
                         {
                             
-                            AddLog(clients[i].Name + " : " + package.command + new StringBuilder().AppendLine().ToString());
+                            AddLog(clients[i].Name + " : " + package.command);
 
                             // SEND THE ANSWER
                             Package responsePackage = new Package();
                             responsePackage.command = "ALLMAIL";
-                            if (mailDb.Count == 0)
+
+                            if (dbConnected)
                             {
-                                responsePackage.info = "No mail on the server";
+                                List<Mail> result = DbGetAllMail();
+                                if (result.Count == 0)
+                                {
+                                    responsePackage.info = "No mail on the server";
+                                }
+                                else
+                                {
+                                    responsePackage.body = result;
+                                    responsePackage.info = "All mails loaded";
+                                }
+                                
                             }
                             else
                             {
-                                responsePackage.body = mailDb;
-                                responsePackage.info = "All mails loaded";
+                                if (mailDb.Count == 0)
+                                {
+                                    responsePackage.info = "No mail on the server";
+                                }
+                                else
+                                {
+                                    responsePackage.body = mailDb;
+                                    responsePackage.info = "All mails loaded";
+                                }
                             }
-                            
 
                             byte[] byteResponsePackage = responsePackage.ToXMLByteArray();
                             clients[i].Socket.Send(byteResponsePackage);
@@ -296,7 +369,7 @@ namespace RegMailServer
                         // QUERY : RENAME CLIENT
                         else if (package.command.Equals("RENAME"))
                         {
-                            AddLog(clients[i].Name + " : " + package.command + new StringBuilder().AppendLine().ToString() + package.info);
+                            AddLog(clients[i].Name + " : " + package.command + " : " + new StringBuilder().AppendLine().ToString() + package.info);
                             clients[i].Name = package.info;
                             ShowClientsNames();
 
@@ -313,7 +386,7 @@ namespace RegMailServer
                         // QUERY : DISCONNECT CLIENT
                         else if (package.command.Equals("DISCONNECT"))
                         {
-                            AddLog(clients[i].Name + " : " + package.command + new StringBuilder().AppendLine().ToString());
+                            AddLog(clients[i].Name + " : " + package.command);
 
 
                             // SEND THE ANSWER
@@ -383,6 +456,11 @@ namespace RegMailServer
 
         private void KickAllClients()
         {
+            if (clients == null)
+            {
+                return;
+            }
+
             while (clients.Count != 0)
             {
                 Client delClient = clients[0];
@@ -395,7 +473,14 @@ namespace RegMailServer
                 responsePackage.info = "You was kicked";
 
                 byte[] byteResponsePackage = responsePackage.ToXMLByteArray();
-                clients[0].Socket.Send(byteResponsePackage);
+                try
+                {
+                    clients[0].Socket.Send(byteResponsePackage);
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine(ex.Message);
+                }
 
                 delClient.Socket.Shutdown(SocketShutdown.Both);
                 delClient.Socket.Close();
@@ -408,6 +493,11 @@ namespace RegMailServer
 
         private void KickOneClient()
         {
+            if (clients == null)
+            {
+                return;
+            }
+
             string delClientName = tbKickClient.Text.Trim();
 
             for (int i = 0; i < clients.Count; i++)
@@ -435,6 +525,195 @@ namespace RegMailServer
             if (clients.Count == 0)
             {
                 SetKickButtons(false);
+            }
+        }
+
+        private bool DbInsert(Mail mail)
+        {
+            bool result = false;
+
+            try
+            {
+                string strTags = "";
+                if (mail.tags == null)
+                {
+                    strTags = "NULL";
+                }
+                else
+                {
+                    foreach (var item in mail.tags)
+                    {
+                        strTags += item + " ";
+                    }
+                    strTags.Trim();
+                    strTags = "'" + strTags + "'";
+                    Console.WriteLine(strTags);
+                }
+
+                string strDate = mail.date.ToString("yyyy-MM-dd HH:mm:ss");
+                string strDateDb = string.Format("CONVERT(DATETIME, '{0}', 20)", strDate);   // гггг - мм - дд чч: ми: сс
+
+                string sqlExpression = string.Format("INSERT INTO mail1(title, date, mail_to, mail_from, tags, message) VALUES('{0}', {1}, '{2}', '{3}', {4}, '{5}')",
+                mail.title, strDateDb, mail.to, mail.from, strTags, mail.message);
+
+                SqlCommand command = new SqlCommand(sqlExpression, connection);
+                int number = command.ExecuteNonQuery();
+                Console.WriteLine("Добавлено объектов: {0}", number);
+
+                if (number == 1)
+                {
+                    result = true;
+                }
+                else result = false;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+               // SetInfo(ex.Message);
+            }            
+            return result;  
+        }
+
+        private List<Mail> DbGetAllMail()
+        {
+            List<Mail> allMail = new List<Mail>();
+
+            try
+            {
+                string sqlExpression = "SELECT * FROM mail1";
+                SqlCommand command = new SqlCommand(sqlExpression, connection);
+
+                SqlDataReader reader = command.ExecuteReader();
+
+                if (reader.HasRows) // если есть данные
+                {
+                    // выводим названия столбцов
+                    Console.WriteLine();
+                    Console.WriteLine("{0}\t{1}\t{2}\t{3}\t{4}\t{5}\t{6}",
+                        reader.GetName(0), reader.GetName(1), reader.GetName(2), reader.GetName(3), reader.GetName(4), reader.GetName(5), reader.GetName(6));
+
+                    while (reader.Read()) // построчно считываем данные
+                    {
+                        object id = reader.GetValue(0);
+                        object title = reader.GetValue(1);
+                        object date = reader.GetValue(2);
+                        object to = reader.GetValue(3);
+                        object from = reader.GetValue(4);
+                        object strTags = reader.GetValue(5);
+                        object message = reader.GetValue(6);
+
+                        
+                        Console.WriteLine("{0} \t{1} \t{2} \t{3} \t{4} \t{5} \t{6}", id, title, date, to, from, strTags, message);
+
+                        Mail m1 = CreateMail(id, title, date, to, from, strTags, message);
+                        allMail.Add(m1);
+
+                    }
+                    Console.WriteLine();
+                }
+                reader.Close();
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                SetInfo(ex.Message);
+            }
+            return allMail;
+        }
+
+        private Mail CreateMail(object id, object title, object date, object to, object from, object strDbTags, object message)
+        {
+            Mail m1 = new Mail();
+            m1.id = (int)id;
+            m1.title = (string)title;
+            m1.to = (string)to;
+            m1.from = (string)from;
+            m1.message = (string)message;
+            m1.date = (DateTime)date;
+
+            string tags = strDbTags as string;
+
+
+            if (tags == null || tags.Equals(""))
+            {
+                m1.tags = null;
+                Console.WriteLine("m1 tags is null");
+            }
+            else
+            {
+                m1.tags = new List<string>();
+
+                string strTags = tags;
+                char[] separators = { ' ', ',', '.', ';', ':' };
+                string[] arrTags = strTags.Split(separators);
+                for (int i = 0; i < arrTags.Length; i++)
+                {
+                    string temp = arrTags[i].Trim();
+                    if (!temp.Equals(""))
+                    {
+                        m1.tags.Add(temp);
+                    }
+                }
+                if (m1.tags.Count == 0)
+                {
+                    m1.tags = null;
+                }
+            }
+            return m1;
+        }
+
+        private void DbDisconnect()
+        {
+            // закрываем подключение
+            connection.Close();
+            Console.WriteLine("Подключение закрыто...");
+            SetInfo("Database connection closed");
+            AddLog("Database connection closed");
+            lbStatus.Text = "Status : Disconnected";
+            lbStatus.ForeColor = Color.Red;
+            dbConnected = false;
+            btnDisconnectDb.Enabled = false;
+            btnConnectDb.Enabled = true;
+        }
+
+        private void StopServer()
+        {
+            KickAllClients();
+            serverWasStopped = true;
+            //threadListener.Interrupt();
+            if (listenSocket != null)
+            {
+                listenSocket.Dispose();
+            }
+
+            //listenSocket.Shutdown(SocketShutdown.Both);
+            //listenSocket.Close();
+
+            lbServerStatus.Text = "SERVER IS SLEEPING";
+            lbServerStatus.ForeColor = Color.Green;
+            SetInfo("Server stopped");
+            AddLog("Server stopped");
+
+            btnStartServer.Enabled = true;
+            btnStopServer.Enabled = false;
+
+            if (dbConnected)
+            {
+                btnDisconnectDb.Enabled = true;
+            }
+            else
+            {
+                btnConnectDb.Enabled = true;
+            }
+        }
+
+        private void ExitApp()
+        {
+            StopServer();
+
+            if (dbConnected)
+            {
+                DbDisconnect();
             }
         }
     }

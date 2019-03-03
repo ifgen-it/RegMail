@@ -15,9 +15,15 @@
         {
             if (disposing && (components != null))
             {
+                ExitApp();
+                System.Console.WriteLine("Exit app1");
                 components.Dispose();
             }
+            
+            ExitApp();
+            System.Console.WriteLine("Exit app2");
             base.Dispose(disposing);
+
         }
 
         #region Windows Form Designer generated code
@@ -30,7 +36,14 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.tabControl1 = new System.Windows.Forms.TabControl();
+            this.tabPage3 = new System.Windows.Forms.TabPage();
+            this.btnDisconnectDb = new System.Windows.Forms.Button();
+            this.btnConnectDb = new System.Windows.Forms.Button();
+            this.lbStatus = new System.Windows.Forms.Label();
+            this.label5 = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
             this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.lbServerStatus = new System.Windows.Forms.Label();
             this.tbKickClient = new System.Windows.Forms.TextBox();
             this.tbClients = new System.Windows.Forms.TextBox();
             this.btnStopServer = new System.Windows.Forms.Button();
@@ -45,14 +58,15 @@
             this.tbLog = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.lbInfo = new System.Windows.Forms.Label();
-            this.lbServerStatus = new System.Windows.Forms.Label();
             this.tabControl1.SuspendLayout();
+            this.tabPage3.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.tabPage2.SuspendLayout();
             this.SuspendLayout();
             // 
             // tabControl1
             // 
+            this.tabControl1.Controls.Add(this.tabPage3);
             this.tabControl1.Controls.Add(this.tabPage1);
             this.tabControl1.Controls.Add(this.tabPage2);
             this.tabControl1.Font = new System.Drawing.Font("Candara", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
@@ -61,6 +75,68 @@
             this.tabControl1.SelectedIndex = 0;
             this.tabControl1.Size = new System.Drawing.Size(660, 357);
             this.tabControl1.TabIndex = 0;
+            // 
+            // tabPage3
+            // 
+            this.tabPage3.Controls.Add(this.btnDisconnectDb);
+            this.tabPage3.Controls.Add(this.btnConnectDb);
+            this.tabPage3.Controls.Add(this.lbStatus);
+            this.tabPage3.Controls.Add(this.label5);
+            this.tabPage3.Controls.Add(this.label3);
+            this.tabPage3.Location = new System.Drawing.Point(4, 28);
+            this.tabPage3.Name = "tabPage3";
+            this.tabPage3.Size = new System.Drawing.Size(652, 325);
+            this.tabPage3.TabIndex = 2;
+            this.tabPage3.Text = "Storage";
+            this.tabPage3.UseVisualStyleBackColor = true;
+            // 
+            // btnDisconnectDb
+            // 
+            this.btnDisconnectDb.ForeColor = System.Drawing.Color.Black;
+            this.btnDisconnectDb.Location = new System.Drawing.Point(149, 172);
+            this.btnDisconnectDb.Name = "btnDisconnectDb";
+            this.btnDisconnectDb.Size = new System.Drawing.Size(100, 32);
+            this.btnDisconnectDb.TabIndex = 2;
+            this.btnDisconnectDb.Text = "Disconnect";
+            this.btnDisconnectDb.UseVisualStyleBackColor = true;
+            // 
+            // btnConnectDb
+            // 
+            this.btnConnectDb.ForeColor = System.Drawing.Color.Black;
+            this.btnConnectDb.Location = new System.Drawing.Point(36, 172);
+            this.btnConnectDb.Name = "btnConnectDb";
+            this.btnConnectDb.Size = new System.Drawing.Size(100, 32);
+            this.btnConnectDb.TabIndex = 1;
+            this.btnConnectDb.Text = "Connect";
+            this.btnConnectDb.UseVisualStyleBackColor = true;
+            // 
+            // lbStatus
+            // 
+            this.lbStatus.AutoSize = true;
+            this.lbStatus.ForeColor = System.Drawing.Color.Red;
+            this.lbStatus.Location = new System.Drawing.Point(38, 250);
+            this.lbStatus.Name = "lbStatus";
+            this.lbStatus.Size = new System.Drawing.Size(156, 19);
+            this.lbStatus.TabIndex = 0;
+            this.lbStatus.Text = "Status : Disconnected";
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(32, 117);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(211, 38);
+            this.label5.TabIndex = 0;
+            this.label5.Text = "Additional : Database storage\r\n\r\n";
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(32, 48);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(178, 19);
+            this.label3.TabIndex = 0;
+            this.label3.Text = "Default : Session storage\r\n";
             // 
             // tabPage1
             // 
@@ -83,6 +159,16 @@
             this.tabPage1.Size = new System.Drawing.Size(652, 325);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "Control";
+            // 
+            // lbServerStatus
+            // 
+            this.lbServerStatus.AutoSize = true;
+            this.lbServerStatus.ForeColor = System.Drawing.Color.Green;
+            this.lbServerStatus.Location = new System.Drawing.Point(183, 45);
+            this.lbServerStatus.Name = "lbServerStatus";
+            this.lbServerStatus.Size = new System.Drawing.Size(146, 19);
+            this.lbServerStatus.TabIndex = 5;
+            this.lbServerStatus.Text = "SERVER IS SLEEPING";
             // 
             // tbKickClient
             // 
@@ -215,7 +301,7 @@
             this.tbLog.ScrollBars = System.Windows.Forms.ScrollBars.Both;
             this.tbLog.Size = new System.Drawing.Size(646, 253);
             this.tbLog.TabIndex = 2;
-            this.tbLog.Text = "Here will be server log\r\nИ сообщения юзеров\r\n";
+            this.tbLog.Text = "\r\n";
             this.tbLog.WordWrap = false;
             // 
             // label1
@@ -240,22 +326,12 @@
             this.lbInfo.TabIndex = 1;
             this.lbInfo.Text = "Welcome to the Server";
             // 
-            // lbServerStatus
-            // 
-            this.lbServerStatus.AutoSize = true;
-            this.lbServerStatus.ForeColor = System.Drawing.Color.Green;
-            this.lbServerStatus.Location = new System.Drawing.Point(183, 45);
-            this.lbServerStatus.Name = "lbServerStatus";
-            this.lbServerStatus.Size = new System.Drawing.Size(146, 19);
-            this.lbServerStatus.TabIndex = 5;
-            this.lbServerStatus.Text = "SERVER IS SLEEPING";
-            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(192)))));
-            this.ClientSize = new System.Drawing.Size(684, 432);
+            this.ClientSize = new System.Drawing.Size(684, 431);
             this.Controls.Add(this.lbInfo);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.tabControl1);
@@ -267,6 +343,8 @@
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "RegMail Server";
             this.tabControl1.ResumeLayout(false);
+            this.tabPage3.ResumeLayout(false);
+            this.tabPage3.PerformLayout();
             this.tabPage1.ResumeLayout(false);
             this.tabPage1.PerformLayout();
             this.tabPage2.ResumeLayout(false);
@@ -295,6 +373,12 @@
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Button btnClearLog;
         private System.Windows.Forms.Label lbServerStatus;
+        private System.Windows.Forms.TabPage tabPage3;
+        private System.Windows.Forms.Button btnDisconnectDb;
+        private System.Windows.Forms.Button btnConnectDb;
+        private System.Windows.Forms.Label lbStatus;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.Label label3;
     }
 }
 

@@ -60,7 +60,7 @@ namespace RegMailServer
             res.AppendLine();
             res.Append("Title : " + title);
             res.AppendLine();
-            res.Append("Date : " + date.ToString("dd-MM-yyyy"));
+            res.Append("Date : " + date.ToString("dd-MM-yyyy HH:mm:ss"));  //"yyyy-MM-dd HH:mm:ss"
             res.AppendLine();
             res.Append("To : " + to);
             res.AppendLine();
@@ -69,7 +69,7 @@ namespace RegMailServer
             res.Append("Tags : " + allTags);
             res.AppendLine();
             res.Append("Message : " + message);
-            res.AppendLine();
+            //res.AppendLine();
 
             return res.ToString();
         }

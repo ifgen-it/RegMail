@@ -15,8 +15,13 @@
         {
             if (disposing && (components != null))
             {
-                components.Dispose();
+                DisconnectServer();
+                System.Console.WriteLine("disposing");
+                components.Dispose(); 
             }
+            
+            DisconnectServer();
+            System.Console.WriteLine("dispose 2");
             base.Dispose(disposing);
         }
 
@@ -132,7 +137,7 @@
             this.tbIP4.Name = "tbIP4";
             this.tbIP4.Size = new System.Drawing.Size(37, 27);
             this.tbIP4.TabIndex = 4;
-            this.tbIP4.Text = "1";
+            this.tbIP4.Text = "66";
             this.tbIP4.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // tbIP3
@@ -141,7 +146,7 @@
             this.tbIP3.Name = "tbIP3";
             this.tbIP3.Size = new System.Drawing.Size(37, 27);
             this.tbIP3.TabIndex = 3;
-            this.tbIP3.Text = "0";
+            this.tbIP3.Text = "100";
             this.tbIP3.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // tbIP2
@@ -150,7 +155,7 @@
             this.tbIP2.Name = "tbIP2";
             this.tbIP2.Size = new System.Drawing.Size(37, 27);
             this.tbIP2.TabIndex = 2;
-            this.tbIP2.Text = "0";
+            this.tbIP2.Text = "122";
             this.tbIP2.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // tbPort
@@ -168,7 +173,6 @@
             this.tbClientName.Name = "tbClientName";
             this.tbClientName.Size = new System.Drawing.Size(151, 27);
             this.tbClientName.TabIndex = 6;
-            this.tbClientName.Text = "Evgen S";
             // 
             // tbIP1
             // 
@@ -176,7 +180,7 @@
             this.tbIP1.Name = "tbIP1";
             this.tbIP1.Size = new System.Drawing.Size(37, 27);
             this.tbIP1.TabIndex = 1;
-            this.tbIP1.Text = "127";
+            this.tbIP1.Text = "91";
             this.tbIP1.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // label10
@@ -289,7 +293,6 @@
             this.tbMessage.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
             this.tbMessage.Size = new System.Drawing.Size(524, 133);
             this.tbMessage.TabIndex = 6;
-            this.tbMessage.Text = "How are you, Kate?";
             // 
             // label8
             // 
@@ -306,7 +309,6 @@
             this.tbTags.Name = "tbTags";
             this.tbTags.Size = new System.Drawing.Size(524, 27);
             this.tbTags.TabIndex = 5;
-            this.tbTags.Text = "new good mail";
             // 
             // label7
             // 
@@ -323,7 +325,6 @@
             this.tbFrom.Name = "tbFrom";
             this.tbFrom.Size = new System.Drawing.Size(524, 27);
             this.tbFrom.TabIndex = 4;
-            this.tbFrom.Text = "Evgen";
             // 
             // label6
             // 
@@ -340,7 +341,6 @@
             this.tbTo.Name = "tbTo";
             this.tbTo.Size = new System.Drawing.Size(524, 27);
             this.tbTo.TabIndex = 3;
-            this.tbTo.Text = "Kate";
             // 
             // label5
             // 
@@ -357,7 +357,6 @@
             this.tbTitle.Name = "tbTitle";
             this.tbTitle.Size = new System.Drawing.Size(524, 27);
             this.tbTitle.TabIndex = 1;
-            this.tbTitle.Text = "How do you do";
             // 
             // label4
             // 
@@ -402,7 +401,6 @@
             this.tbMailList.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
             this.tbMailList.Size = new System.Drawing.Size(652, 268);
             this.tbMailList.TabIndex = 3;
-            this.tbMailList.Text = "Here will be loaded mail";
             // 
             // btnClearMail
             // 
@@ -449,7 +447,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.InactiveCaptionText;
-            this.ClientSize = new System.Drawing.Size(684, 432);
+            this.ClientSize = new System.Drawing.Size(684, 431);
             this.Controls.Add(this.lbInfo);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.tabControl1);

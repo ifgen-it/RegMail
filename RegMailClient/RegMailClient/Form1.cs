@@ -53,6 +53,11 @@ namespace RegMailClient
 
         private void BtnConnect_Click(object sender, EventArgs e)
         {
+            if (!ConfigServer())
+            {
+                return;
+            }
+
             if (ConnectServer())
             {
                 lbStatusConnection.Text = "Connected";
@@ -189,9 +194,10 @@ namespace RegMailClient
             m1.message = tbMessage.Text;
             m1.date = pickDate.Value;
 
-            if (tbTags.Equals(""))
+            if (tbTags.Text.Equals(""))
             {
                 m1.tags = null;
+                Console.WriteLine("m1 tags is null");
             }
             else
             {
@@ -236,21 +242,39 @@ namespace RegMailClient
             
         }
 
-        private void ConfigServer()
+        private bool ConfigServer()
         {
-            string ip1 = tbIP1.Text.Trim();
-            string ip2 = tbIP2.Text.Trim();
-            string ip3 = tbIP3.Text.Trim();
-            string ip4 = tbIP4.Text.Trim();
-            serverPort = int.Parse(tbPort.Text.Trim());
-            clientName = tbClientName.Text.Trim();
+            int ip1, ip2, ip3, ip4;
+            ip1 = ip2 = ip3 = ip4 = 0;
+            try
+            {
+                ip1 = int.Parse(tbIP1.Text.Trim());
+                ip2 = int.Parse(tbIP2.Text.Trim());
+                ip3 = int.Parse(tbIP3.Text.Trim());
+                ip4 = int.Parse(tbIP4.Text.Trim());
+                serverPort = int.Parse(tbPort.Text.Trim());
+                clientName = tbClientName.Text.Trim();
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                SetInfo("Input correct IP adress and Port");
+                return false;
+            }
 
+            if (clientName.Equals(""))
+            {
+                SetInfo("Input Name");
+                return false;
+            }
+            
             serverAddress = ip1 + "." + ip2 + "." + ip3 + "." + ip4;
+
+            return true;
         }
 
         private bool ConnectServer()
         {
-            ConfigServer();
             try
             {
                 IPEndPoint ipPoint = new IPEndPoint(IPAddress.Parse(serverAddress), serverPort);

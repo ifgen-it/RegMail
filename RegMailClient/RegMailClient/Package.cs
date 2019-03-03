@@ -45,6 +45,13 @@ namespace RegMailClient
                 ms.Write(bytes, 0, bytes.Length);
                 ms.Seek(0, SeekOrigin.Begin);
                 Package pack = (Package)xmlSer.Deserialize(ms);
+                for (int i = 0; i < pack.body.Count; i++)
+                {
+                    if (pack.body[i].tags.Count == 0)
+                    {
+                        pack.body[i].tags = null;
+                    }
+                }
                 return pack;
             }
         }
